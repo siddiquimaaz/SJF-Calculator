@@ -12,7 +12,7 @@ namespace SJF_Calculator
     {
         private List<Process> processes = new List<Process>();
         private double avgTurnAroundTime = 0;
-        private double avgWaitingTime = 0;
+        private double avgWaitingTime = 1;
 
         public Form1()
         {
