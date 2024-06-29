@@ -22,7 +22,7 @@ namespace SJF_Calculator
             this.FormBorderStyle = FormBorderStyle.None;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Paint += new PaintEventHandler(Form1_Paint);
-            CloseBtn.Click += new EventHandler(CloseBtn_Click);
+
         }
 
         private void CalculateSJF_Click(object sender, EventArgs e)
@@ -146,7 +146,7 @@ namespace SJF_Calculator
                 g.Clear(Color.White);
 
                 int currentX = 0;
-                int processHeight = ganttChartPanel.Height / 3;
+                int processHeight = ganttChartPanel.Height / 2;
 
                 foreach (var process in scheduledProcesses.OrderBy(p => p.CompletionTime - p.BurstTime))
                 {
@@ -224,6 +224,11 @@ namespace SJF_Calculator
             GenerateSampleData();
             // Optionally, you can also call CalculateSJF_Click() here if you want immediate calculation
             // CalculateSJF_Click(sender, e);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 

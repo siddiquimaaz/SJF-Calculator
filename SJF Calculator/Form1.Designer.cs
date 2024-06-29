@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             panel1 = new Panel();
             label9 = new Label();
             panel2 = new Panel();
@@ -45,10 +44,10 @@
             ProcessIDs = new TextBox();
             ArrivalTime = new TextBox();
             BurstTime = new TextBox();
-            CloseBtn = new Button();
             CalculateSJF = new Button();
-            ganttChartPanel = new Panel();
             TestSampleData = new Button();
+            ganttChartPanel = new FlowLayoutPanel();
+            button1 = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -57,6 +56,7 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(63, 81, 181);
+            panel1.Controls.Add(button1);
             panel1.Controls.Add(label9);
             panel1.Location = new Point(0, 13);
             panel1.Name = "panel1";
@@ -227,19 +227,6 @@
             BurstTime.TabIndex = 11;
             BurstTime.TextAlign = HorizontalAlignment.Center;
             // 
-            // CloseBtn
-            // 
-            CloseBtn.BackColor = Color.FromArgb(51, 51, 51);
-            CloseBtn.BackgroundImage = (Image)resources.GetObject("CloseBtn.BackgroundImage");
-            CloseBtn.BackgroundImageLayout = ImageLayout.Zoom;
-            CloseBtn.FlatStyle = FlatStyle.Flat;
-            CloseBtn.Location = new Point(12, 535);
-            CloseBtn.Name = "CloseBtn";
-            CloseBtn.Size = new Size(75, 23);
-            CloseBtn.TabIndex = 12;
-            CloseBtn.UseVisualStyleBackColor = false;
-            CloseBtn.Click += CloseBtn_Click;
-            // 
             // CalculateSJF
             // 
             CalculateSJF.BackColor = Color.FromArgb(0, 63, 143);
@@ -252,13 +239,6 @@
             CalculateSJF.Text = "Calculate";
             CalculateSJF.UseVisualStyleBackColor = false;
             CalculateSJF.Click += CalculateSJF_Click;
-            // 
-            // ganttChartPanel
-            // 
-            ganttChartPanel.Location = new Point(654, 109);
-            ganttChartPanel.Name = "ganttChartPanel";
-            ganttChartPanel.Size = new Size(670, 61);
-            ganttChartPanel.TabIndex = 13;
             // 
             // TestSampleData
             // 
@@ -274,17 +254,38 @@
             TestSampleData.UseVisualStyleBackColor = false;
             TestSampleData.Click += TestSampleData_Click;
             // 
+            // ganttChartPanel
+            // 
+            ganttChartPanel.AutoScroll = true;
+            ganttChartPanel.Location = new Point(727, 86);
+            ganttChartPanel.Name = "ganttChartPanel";
+            ganttChartPanel.Size = new Size(678, 74);
+            ganttChartPanel.TabIndex = 15;
+            ganttChartPanel.WrapContents = false;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.Black;
+            button1.FlatStyle = FlatStyle.Popup;
+            button1.ForeColor = Color.WhiteSmoke;
+            button1.Location = new Point(1334, 12);
+            button1.Name = "button1";
+            button1.Size = new Size(85, 30);
+            button1.TabIndex = 14;
+            button1.Text = "Close";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(9F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1443, 724);
-            Controls.Add(TestSampleData);
             Controls.Add(ganttChartPanel);
+            Controls.Add(TestSampleData);
             Controls.Add(dataGridView1);
             Controls.Add(CalculateSJF);
-            Controls.Add(CloseBtn);
             Controls.Add(BurstTime);
             Controls.Add(ArrivalTime);
             Controls.Add(ProcessIDs);
@@ -325,10 +326,10 @@
         private TextBox ProcessIDs;
         private TextBox ArrivalTime;
         private TextBox BurstTime;
-        private Button CloseBtn;
         private Label label9;
         private Button CalculateSJF;
-        private Panel ganttChartPanel;
         private Button TestSampleData;
+        private FlowLayoutPanel ganttChartPanel;
+        private Button button1;
     }
 }
