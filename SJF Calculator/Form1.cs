@@ -222,8 +222,7 @@ namespace SJF_Calculator
         private void TestSampleData_Click(object sender, EventArgs e)
         {
             GenerateSampleData();
-            // Optionally, you can also call CalculateSJF_Click() here if you want immediate calculation
-            // CalculateSJF_Click(sender, e);
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
