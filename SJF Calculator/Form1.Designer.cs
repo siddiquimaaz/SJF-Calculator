@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            button1 = new Button();
             label9 = new Label();
             panel2 = new Panel();
             AvgWT = new Label();
@@ -47,7 +48,7 @@
             CalculateSJF = new Button();
             TestSampleData = new Button();
             ganttChartPanel = new FlowLayoutPanel();
-            button1 = new Button();
+            checkBox1 = new CheckBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -63,13 +64,26 @@
             panel1.Size = new Size(1443, 57);
             panel1.TabIndex = 0;
             // 
+            // button1
+            // 
+            button1.BackColor = Color.Black;
+            button1.FlatStyle = FlatStyle.Popup;
+            button1.ForeColor = Color.WhiteSmoke;
+            button1.Location = new Point(1334, 12);
+            button1.Name = "button1";
+            button1.Size = new Size(85, 30);
+            button1.TabIndex = 14;
+            button1.Text = "Close";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
             // label9
             // 
             label9.AutoSize = true;
             label9.BackColor = Color.Transparent;
             label9.Font = new Font("Verdana", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label9.ForeColor = Color.White;
-            label9.Location = new Point(497, 12);
+            label9.Location = new Point(500, 0);
             label9.Name = "label9";
             label9.Size = new Size(379, 45);
             label9.TabIndex = 13;
@@ -82,7 +96,7 @@
             panel2.Controls.Add(AvgTAT);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(label1);
-            panel2.Location = new Point(17, 381);
+            panel2.Location = new Point(17, 518);
             panel2.Name = "panel2";
             panel2.Size = new Size(305, 57);
             panel2.TabIndex = 1;
@@ -92,7 +106,7 @@
             AvgWT.AutoSize = true;
             AvgWT.BackColor = Color.Transparent;
             AvgWT.ForeColor = Color.White;
-            AvgWT.Location = new Point(211, 33);
+            AvgWT.Location = new Point(240, 33);
             AvgWT.Name = "AvgWT";
             AvgWT.Size = new Size(51, 18);
             AvgWT.TabIndex = 3;
@@ -103,7 +117,7 @@
             AvgTAT.AutoSize = true;
             AvgTAT.BackColor = Color.Transparent;
             AvgTAT.ForeColor = Color.White;
-            AvgTAT.Location = new Point(211, 11);
+            AvgTAT.Location = new Point(240, 11);
             AvgTAT.Name = "AvgTAT";
             AvgTAT.Size = new Size(51, 18);
             AvgTAT.TabIndex = 2;
@@ -133,20 +147,23 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.BackgroundColor = Color.White;
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.GridColor = Color.FromArgb(0, 63, 143);
-            dataGridView1.Location = new Point(654, 204);
+            dataGridView1.Location = new Point(727, 233);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(670, 409);
+            dataGridView1.Size = new Size(678, 409);
             dataGridView1.TabIndex = 3;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(17, 178);
+            label5.Location = new Point(17, 298);
             label5.Name = "label5";
             label5.Size = new Size(213, 18);
             label5.TabIndex = 4;
@@ -155,7 +172,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(17, 204);
+            label6.Location = new Point(17, 335);
             label6.Name = "label6";
             label6.Size = new Size(139, 18);
             label6.TabIndex = 5;
@@ -164,7 +181,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(17, 233);
+            label7.Location = new Point(17, 372);
             label7.Name = "label7";
             label7.Size = new Size(139, 18);
             label7.TabIndex = 6;
@@ -173,7 +190,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(17, 262);
+            label8.Location = new Point(17, 411);
             label8.Name = "label8";
             label8.Size = new Size(132, 18);
             label8.TabIndex = 7;
@@ -181,9 +198,10 @@
             // 
             // NoOfProcesses
             // 
-            NoOfProcesses.BackColor = Color.White;
+            NoOfProcesses.BackColor = Color.Gainsboro;
+            NoOfProcesses.BorderStyle = BorderStyle.FixedSingle;
             NoOfProcesses.ForeColor = Color.FromArgb(0, 63, 143);
-            NoOfProcesses.Location = new Point(242, 175);
+            NoOfProcesses.Location = new Point(242, 294);
             NoOfProcesses.Multiline = true;
             NoOfProcesses.Name = "NoOfProcesses";
             NoOfProcesses.PlaceholderText = "No. of Processes";
@@ -193,9 +211,10 @@
             // 
             // ProcessIDs
             // 
-            ProcessIDs.BackColor = Color.White;
+            ProcessIDs.BackColor = Color.Gainsboro;
+            ProcessIDs.BorderStyle = BorderStyle.FixedSingle;
             ProcessIDs.ForeColor = Color.FromArgb(0, 63, 143);
-            ProcessIDs.Location = new Point(242, 201);
+            ProcessIDs.Location = new Point(242, 335);
             ProcessIDs.Multiline = true;
             ProcessIDs.Name = "ProcessIDs";
             ProcessIDs.PlaceholderText = "Process IDs";
@@ -205,9 +224,10 @@
             // 
             // ArrivalTime
             // 
-            ArrivalTime.BackColor = Color.White;
+            ArrivalTime.BackColor = Color.Gainsboro;
+            ArrivalTime.BorderStyle = BorderStyle.FixedSingle;
             ArrivalTime.ForeColor = Color.FromArgb(0, 63, 143);
-            ArrivalTime.Location = new Point(242, 230);
+            ArrivalTime.Location = new Point(242, 372);
             ArrivalTime.Multiline = true;
             ArrivalTime.Name = "ArrivalTime";
             ArrivalTime.PlaceholderText = "Arrival Time";
@@ -217,9 +237,10 @@
             // 
             // BurstTime
             // 
-            BurstTime.BackColor = Color.White;
+            BurstTime.BackColor = Color.Gainsboro;
+            BurstTime.BorderStyle = BorderStyle.FixedSingle;
             BurstTime.ForeColor = Color.FromArgb(0, 63, 143);
-            BurstTime.Location = new Point(242, 259);
+            BurstTime.Location = new Point(242, 411);
             BurstTime.Multiline = true;
             BurstTime.Name = "BurstTime";
             BurstTime.PlaceholderText = "Burst Time";
@@ -232,7 +253,7 @@
             CalculateSJF.BackColor = Color.FromArgb(0, 63, 143);
             CalculateSJF.FlatStyle = FlatStyle.Flat;
             CalculateSJF.ForeColor = Color.White;
-            CalculateSJF.Location = new Point(198, 311);
+            CalculateSJF.Location = new Point(198, 451);
             CalculateSJF.Name = "CalculateSJF";
             CalculateSJF.Size = new Size(85, 29);
             CalculateSJF.TabIndex = 0;
@@ -246,7 +267,7 @@
             TestSampleData.BackgroundImageLayout = ImageLayout.Zoom;
             TestSampleData.FlatStyle = FlatStyle.Flat;
             TestSampleData.ForeColor = SystemColors.Control;
-            TestSampleData.Location = new Point(289, 311);
+            TestSampleData.Location = new Point(289, 451);
             TestSampleData.Name = "TestSampleData";
             TestSampleData.Size = new Size(103, 29);
             TestSampleData.TabIndex = 14;
@@ -257,24 +278,20 @@
             // ganttChartPanel
             // 
             ganttChartPanel.AutoScroll = true;
-            ganttChartPanel.Location = new Point(727, 86);
+            ganttChartPanel.Location = new Point(630, 86);
             ganttChartPanel.Name = "ganttChartPanel";
-            ganttChartPanel.Size = new Size(678, 74);
+            ganttChartPanel.Size = new Size(775, 74);
             ganttChartPanel.TabIndex = 15;
-            ganttChartPanel.WrapContents = false;
             // 
-            // button1
+            // checkBox1
             // 
-            button1.BackColor = Color.Black;
-            button1.FlatStyle = FlatStyle.Popup;
-            button1.ForeColor = Color.WhiteSmoke;
-            button1.Location = new Point(1334, 12);
-            button1.Name = "button1";
-            button1.Size = new Size(85, 30);
-            button1.TabIndex = 14;
-            button1.Text = "Close";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(409, 412);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(121, 22);
+            checkBox1.TabIndex = 16;
+            checkBox1.Text = "Pre-Emptive";
+            checkBox1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -282,6 +299,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1443, 724);
+            Controls.Add(checkBox1);
             Controls.Add(ganttChartPanel);
             Controls.Add(TestSampleData);
             Controls.Add(dataGridView1);
@@ -300,6 +318,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "Form1";
             Text = "Form1";
+            Load += Form1_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -331,5 +350,6 @@
         private Button TestSampleData;
         private FlowLayoutPanel ganttChartPanel;
         private Button button1;
+        private CheckBox checkBox1;
     }
 }

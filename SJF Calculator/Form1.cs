@@ -28,141 +28,150 @@ namespace SJF_Calculator
         private void CalculateSJF_Click(object sender, EventArgs e)
         {
             ClearForm();
-
-            int n;
-            if (!int.TryParse(NoOfProcesses.Text, out n) || n <= 0)
+            if (checkBox1.Checked)
             {
-                MessageBox.Show("Please enter a valid positive number of processes.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
 
-            string[] processIds = ProcessIDs.Text.Split(',');
-            string[] arrivalTimes = ArrivalTime.Text.Split(',');
-            string[] burstTimes = BurstTime.Text.Split(',');
-
-            if (!ValidateInputs(n, processIds, arrivalTimes, burstTimes))
-            {
-                MessageBox.Show("The number of input values does not match the specified number of processes.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            processes.Clear();
-
-            try
-            {
-                for (int i = 0; i < n; i++)
-                {
-                    processes.Add(new Process
-                    {
-                        ProcessID = int.Parse(processIds[i]),
-                        ArrivalTime = int.Parse(arrivalTimes[i]),
-                        BurstTime = int.Parse(burstTimes[i])
-                    });
-                }
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Please ensure all input values are integers.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            processes = processes.OrderBy(p => p.ArrivalTime).ToList();
-
-            int currentTime = 0;
-            scheduledProcesses.Clear(); // Clear the scheduled processes list
-
-            while (processes.Any())
-            {
-                var availableProcesses = processes.Where(p => p.ArrivalTime <= currentTime).ToList();
-                if (!availableProcesses.Any())
-                {
-                    currentTime = processes.Min(p => p.ArrivalTime);
-                    availableProcesses = processes.Where(p => p.ArrivalTime <= currentTime).ToList();
-                }
-
-                var nextProcess = availableProcesses.OrderBy(p => p.BurstTime).First();
-                processes.Remove(nextProcess);
-
-                if (currentTime < nextProcess.ArrivalTime)
-                {
-                    currentTime = nextProcess.ArrivalTime;
-                }
-                nextProcess.CompletionTime = currentTime + nextProcess.BurstTime;
-                nextProcess.TurnAroundTime = nextProcess.CompletionTime - nextProcess.ArrivalTime;
-                nextProcess.WaitingTime = nextProcess.TurnAroundTime - nextProcess.BurstTime;
-                currentTime = nextProcess.CompletionTime;
-
-                scheduledProcesses.Add(nextProcess);
-            }
-
-            avgTurnAroundTime = scheduledProcesses.Average(p => p.TurnAroundTime);
-            avgWaitingTime = scheduledProcesses.Average(p => p.WaitingTime);
-
-            scheduledProcesses = scheduledProcesses.OrderBy(p => p.ProcessID).ToList();
-
-            // Update DataGridView
-            dataGridView1.DataSource = scheduledProcesses;
-            AvgTAT.Text = avgTurnAroundTime.ToString("F2");
-            AvgWT.Text = avgWaitingTime.ToString("F2");
-
-            // Debug messages
-            if (scheduledProcesses.Count > 0)
-            {
-                MessageBox.Show($"Processes scheduled: {scheduledProcesses.Count}", "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                DrawGanttChart();
             }
             else
             {
-                MessageBox.Show("No processes to display in Gantt chart.", "No Processes", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
 
-        private bool ValidateInputs(int n, string[] processIds, string[] arrivalTimes, string[] burstTimes)
-        {
-            return processIds.Length == n && arrivalTimes.Length == n && burstTimes.Length == n;
-        }
 
-        private void ClearForm()
-        {
-            dataGridView1.DataSource = null;
-            AvgTAT.Text = "0";
-            AvgWT.Text = "0";
-            ganttChartPanel.BackgroundImage = null; // Clear gantt chart panel background
-        }
 
-        private void DrawGanttChart()
-        {
-            if (scheduledProcesses.Count == 0)
-            {
-                MessageBox.Show("No processes to display in Gantt chart.", "No Processes", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            int totalBurstTime = scheduledProcesses.Sum(p => p.BurstTime);
-            Bitmap bmp = new Bitmap(ganttChartPanel.Width, ganttChartPanel.Height);
-
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                g.Clear(Color.White);
-
-                int currentX = 0;
-                int processHeight = ganttChartPanel.Height / 2;
-
-                foreach (var process in scheduledProcesses.OrderBy(p => p.CompletionTime - p.BurstTime))
+                int n;
+                if (!int.TryParse(NoOfProcesses.Text, out n) || n <= 0)
                 {
-                    int processWidth = (int)Math.Round((double)process.BurstTime / totalBurstTime * ganttChartPanel.Width);
+                    MessageBox.Show("Please enter a valid positive number of processes.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
-                    g.FillRectangle(new SolidBrush(Color.FromArgb(63, 81, 181)), currentX, 0, processWidth, processHeight);
-                    g.DrawRectangle(Pens.Black, currentX, 0, processWidth, processHeight);
-                    g.DrawString("P" + process.ProcessID, this.Font, Brushes.White, currentX + (processWidth / 2) - 10, 10);
-                    g.DrawString(process.CompletionTime.ToString(), this.Font, Brushes.Black, currentX + processWidth - 10, processHeight + 10);
+                string[] processIds = ProcessIDs.Text.Split(',');
+                string[] arrivalTimes = ArrivalTime.Text.Split(',');
+                string[] burstTimes = BurstTime.Text.Split(',');
 
-                    currentX += processWidth;
+                if (!ValidateInputs(n, processIds, arrivalTimes, burstTimes))
+                {
+                    MessageBox.Show("The number of input values does not match the specified number of processes.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                processes.Clear();
+
+                try
+                {
+                    for (int i = 0; i < n; i++)
+                    {
+                        processes.Add(new Process
+                        {
+                            ProcessID = int.Parse(processIds[i]),
+                            ArrivalTime = int.Parse(arrivalTimes[i]),
+                            BurstTime = int.Parse(burstTimes[i])
+                        });
+                    }
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Please ensure all input values are integers.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                processes = processes.OrderBy(p => p.ArrivalTime).ToList();
+
+                int currentTime = 0;
+                scheduledProcesses.Clear(); // Clear the scheduled processes list
+
+                while (processes.Any())
+                {
+                    var availableProcesses = processes.Where(p => p.ArrivalTime <= currentTime).ToList();
+                    if (!availableProcesses.Any())
+                    {
+                        currentTime = processes.Min(p => p.ArrivalTime);
+                        availableProcesses = processes.Where(p => p.ArrivalTime <= currentTime).ToList();
+                    }
+
+                    var nextProcess = availableProcesses.OrderBy(p => p.BurstTime).First();
+                    processes.Remove(nextProcess);
+
+                    if (currentTime < nextProcess.ArrivalTime)
+                    {
+                        currentTime = nextProcess.ArrivalTime;
+                    }
+                    nextProcess.CompletionTime = currentTime + nextProcess.BurstTime;
+                    nextProcess.TurnAroundTime = nextProcess.CompletionTime - nextProcess.ArrivalTime;
+                    nextProcess.WaitingTime = nextProcess.TurnAroundTime - nextProcess.BurstTime;
+                    currentTime = nextProcess.CompletionTime;
+
+                    scheduledProcesses.Add(nextProcess);
+                }
+
+                avgTurnAroundTime = scheduledProcesses.Average(p => p.TurnAroundTime);
+                avgWaitingTime = scheduledProcesses.Average(p => p.WaitingTime);
+
+                scheduledProcesses = scheduledProcesses.OrderBy(p => p.ProcessID).ToList();
+
+                // Update DataGridView
+                dataGridView1.DataSource = scheduledProcesses;
+                AvgTAT.Text = avgTurnAroundTime.ToString("F2");
+                AvgWT.Text = avgWaitingTime.ToString("F2");
+
+                // Debug messages
+                if (scheduledProcesses.Count > 0)
+                {
+                    MessageBox.Show($"Processes scheduled: {scheduledProcesses.Count}", "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    DrawGanttChart();
+                }
+                else
+                {
+                    MessageBox.Show("No processes to display in Gantt chart.", "No Processes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-
-            ganttChartPanel.BackgroundImage = bmp;
         }
+            private bool ValidateInputs(int n, string[] processIds, string[] arrivalTimes, string[] burstTimes)
+            {
+                return processIds.Length == n && arrivalTimes.Length == n && burstTimes.Length == n;
+            }
+
+            private void ClearForm()
+            {
+                dataGridView1.DataSource = null;
+                AvgTAT.Text = "0";
+                AvgWT.Text = "0";
+                ganttChartPanel.BackgroundImage = null; // Clear gantt chart panel background
+            }
+
+            private void DrawGanttChart()
+            {
+                if (scheduledProcesses.Count == 0)
+                {
+                    MessageBox.Show("No processes to display in Gantt chart.", "No Processes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                int totalBurstTime = scheduledProcesses.Sum(p => p.BurstTime);
+                Bitmap bmp = new Bitmap(ganttChartPanel.Width, ganttChartPanel.Height);
+
+                using (Graphics g = Graphics.FromImage(bmp))
+                {
+                    g.Clear(Color.White);
+
+                    int currentX = 0;
+                    int processHeight = ganttChartPanel.Height / 2;
+
+                    foreach (var process in scheduledProcesses.OrderBy(p => p.CompletionTime - p.BurstTime))
+                    {
+                        int processWidth = (int)Math.Round((double)process.BurstTime / totalBurstTime * ganttChartPanel.Width);
+
+                        g.FillRectangle(new SolidBrush(Color.FromArgb(63, 81, 181)), currentX, 0, processWidth, processHeight);
+                        g.DrawRectangle(Pens.Black, currentX, 0, processWidth, processHeight);
+                        g.DrawString("P" + process.ProcessID, this.Font, Brushes.White, currentX + (processWidth / 2) - 10, 10);
+                        g.DrawString(process.CompletionTime.ToString(), this.Font, Brushes.Black, currentX + processWidth - 10, processHeight + 10);
+
+                        currentX += processWidth;
+                    }
+                }
+
+                ganttChartPanel.BackgroundImage = bmp;
+            }
+        
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
@@ -186,7 +195,7 @@ namespace SJF_Calculator
         private void GenerateSampleData()
         {
             Random random = new Random();
-            int numProcesses = random.Next(3, 6); // Generate between 3 to 5 processes
+            int numProcesses = random.Next(3, 5); // Generate between 3 to 4 processes
 
             StringBuilder processIds = new StringBuilder();
             StringBuilder arrivalTimes = new StringBuilder();
@@ -222,13 +231,17 @@ namespace SJF_Calculator
         private void TestSampleData_Click(object sender, EventArgs e)
         {
             GenerateSampleData();
-            
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        { }
+
     }
 
     public class Process
