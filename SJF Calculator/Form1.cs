@@ -220,14 +220,26 @@ namespace SJF_Calculator
                     ForeColor = Color.Black,
                     BackColor = Color.Transparent,
                     AutoSize = true,
-                    Location = new Point(currentX - 10, processHeight + 10) // Place at the bottom of the Gantt chart
+                    Location = new Point(currentX - 20, processHeight + 10) // Place at the bottom of the Gantt chart
                 };
 
                 ganttChartPanel.Controls.Add(labelCompletionTime);
             }
 
+            // Add the start time 0 at the beginning of the chart
+            Label startTimeLabel = new Label
+            {
+                Text = "0",
+                ForeColor = Color.Black,
+                BackColor = Color.Transparent,
+                AutoSize = true,
+                Location = new Point(0, processHeight + 10)
+            };
+            ganttChartPanel.Controls.Add(startTimeLabel);
+
             ganttChartPanel.HorizontalScroll.Visible = true; // Ensure horizontal scrollbar is visible
         }
+
 
 
 
