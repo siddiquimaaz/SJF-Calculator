@@ -61,7 +61,7 @@
             panel1.Controls.Add(label9);
             panel1.Location = new Point(0, 13);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1443, 57);
+            panel1.Size = new Size(1793, 67);
             panel1.TabIndex = 0;
             // 
             // button1
@@ -69,7 +69,7 @@
             button1.BackColor = Color.Black;
             button1.FlatStyle = FlatStyle.Popup;
             button1.ForeColor = Color.WhiteSmoke;
-            button1.Location = new Point(1334, 12);
+            button1.Location = new Point(1688, 19);
             button1.Name = "button1";
             button1.Size = new Size(85, 30);
             button1.TabIndex = 14;
@@ -83,7 +83,7 @@
             label9.BackColor = Color.Transparent;
             label9.Font = new Font("Verdana", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label9.ForeColor = Color.White;
-            label9.Location = new Point(500, 0);
+            label9.Location = new Point(700, 10);
             label9.Name = "label9";
             label9.Size = new Size(379, 45);
             label9.TabIndex = 13;
@@ -98,7 +98,7 @@
             panel2.Controls.Add(label1);
             panel2.Location = new Point(17, 518);
             panel2.Name = "panel2";
-            panel2.Size = new Size(305, 57);
+            panel2.Size = new Size(513, 57);
             panel2.TabIndex = 1;
             // 
             // AvgWT
@@ -108,9 +108,8 @@
             AvgWT.ForeColor = Color.White;
             AvgWT.Location = new Point(240, 33);
             AvgWT.Name = "AvgWT";
-            AvgWT.Size = new Size(51, 18);
+            AvgWT.Size = new Size(0, 18);
             AvgWT.TabIndex = 3;
-            AvgWT.Text = "label4";
             // 
             // AvgTAT
             // 
@@ -119,9 +118,8 @@
             AvgTAT.ForeColor = Color.White;
             AvgTAT.Location = new Point(240, 11);
             AvgTAT.Name = "AvgTAT";
-            AvgTAT.Size = new Size(51, 18);
+            AvgTAT.Size = new Size(0, 18);
             AvgTAT.TabIndex = 2;
-            AvgTAT.Text = "label3";
             // 
             // label2
             // 
@@ -139,7 +137,7 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.ForeColor = Color.White;
-            label1.Location = new Point(17, 11);
+            label1.Location = new Point(17, 9);
             label1.Name = "label1";
             label1.Size = new Size(205, 18);
             label1.TabIndex = 0;
@@ -153,11 +151,11 @@
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.GridColor = Color.FromArgb(0, 63, 143);
-            dataGridView1.Location = new Point(727, 233);
+            dataGridView1.Location = new Point(630, 214);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(678, 409);
+            dataGridView1.Size = new Size(1154, 435);
             dataGridView1.TabIndex = 3;
             // 
             // label5
@@ -278,14 +276,16 @@
             // ganttChartPanel
             // 
             ganttChartPanel.AutoScroll = true;
-            ganttChartPanel.Location = new Point(630, 86);
+            ganttChartPanel.Location = new Point(820, 123);
             ganttChartPanel.Name = "ganttChartPanel";
             ganttChartPanel.Size = new Size(775, 74);
             ganttChartPanel.TabIndex = 15;
+            ganttChartPanel.WrapContents = false;
             // 
             // checkBox1
             // 
             checkBox1.AutoSize = true;
+            checkBox1.Font = new Font("Verdana", 9F, FontStyle.Underline, GraphicsUnit.Point, 0);
             checkBox1.Location = new Point(409, 412);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(121, 22);
@@ -298,7 +298,7 @@
             AutoScaleDimensions = new SizeF(9F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1443, 724);
+            ClientSize = new Size(1796, 790);
             Controls.Add(checkBox1);
             Controls.Add(ganttChartPanel);
             Controls.Add(TestSampleData);

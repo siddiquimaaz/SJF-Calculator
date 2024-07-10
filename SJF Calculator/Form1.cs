@@ -169,7 +169,7 @@ namespace SJF_Calculator
             ganttChartPanel.Controls.Clear(); // Clear gantt chart panel controls
         }
 
-        private void DrawGanttChart()
+        /*private void DrawGanttChart()
         {
             if (scheduledProcesses.Count == 0)
             {
@@ -239,7 +239,41 @@ namespace SJF_Calculator
 
             ganttChartPanel.HorizontalScroll.Visible = true; // Ensure horizontal scrollbar is visible
         }
+        */
+        private void DrawGanttChart()
+        {
+            if (scheduledProcesses.Count == 0)
+            {
+                MessageBox.Show("No processes to display in Gantt chart.", "No Processes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
+            int totalBurstTime = scheduledProcesses.Sum(p => p.BurstTime);
+            Bitmap bmp = new Bitmap(ganttChartPanel.Width, ganttChartPanel.Height);
+
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                g.Clear(Color.White);
+
+                int currentX = 0;
+                int processHeight = ganttChartPanel.Height / 2;
+
+                foreach (var process in scheduledProcesses.OrderBy(p => p.CompletionTime - p.BurstTime))
+                {
+                    int processWidth = (int)Math.Round((double)process.BurstTime / totalBurstTime * ganttChartPanel.Width);
+                    processWidth = 150;
+                    g.FillRectangle(new SolidBrush(Color.FromArgb(63, 81, 181)), currentX, 0, processWidth, processHeight);
+                    g.DrawRectangle(Pens.Black, currentX, 0, processWidth, processHeight);
+                    g.DrawString("P" + process.ProcessID, this.Font, Brushes.White, currentX + (processWidth / 2) - 10, 10);
+                    g.DrawString(process.CompletionTime.ToString(), this.Font, Brushes.Black, currentX + processWidth - 10, processHeight + 10);
+
+                    currentX += processWidth;
+                }
+            }
+            
+
+            ganttChartPanel.BackgroundImage = bmp;
+        }
 
 
 
